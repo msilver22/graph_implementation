@@ -76,7 +76,8 @@ graph = ig.Graph.Read_GML(file_path)
 
 
 ## API References
-Let's assume that the variable `graph` is a nx.Graph or ig.Graph object
+Let's assume that the variable `graph` is a nx.Graph or ig.Graph object.  
+To check the computational time for each file type, refer to this [link](https://github.com/msilver22/graph_implementation/blob/main/outputs/functions_time_table.md).
 
 ### Number of nodes
 #### NetworkX:
