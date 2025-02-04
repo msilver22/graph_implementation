@@ -10,7 +10,7 @@ import igraph as ig
 ## Import functions
 
 Graphs can be stored in various formats such as **`.txt` (edge list), `.mtx` (matrix market format), and `.gml` (graph markup language)**.  
-To check the computational time for each file type, refer to this [link](https://github.com/msilver22/graph_implementation/blob/main/outputs/import_time_table.md).
+To check the computational time for each function, refer to this [link](https://github.com/msilver22/graph_implementation/blob/main/outputs/import_time_table.md).
 
 ### Importing from a `.txt` file
 
