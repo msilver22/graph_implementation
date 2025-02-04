@@ -1,2 +1,61 @@
-# Graph implementation
-Comparisons between NetworkX and iGraph libraries.
+# Graph implementation using NetworkX and iGraph libraries
+
+To start, we need to import the required libraries:
+
+```python
+import networkx as nx
+import igraph as ig
+```
+
+## Import functions
+
+Graphs can be stored in various formats such as **`.txt` (edge list), `.mtx` (matrix market format), and `.gml` (graph markup language)**. 
+
+### Importing from a `.txt` file
+
+Let's assume we store the graph in the following path:
+```python
+file_path = "graph.txt"
+```
+
+#### Case 1: Standard Edge List 
+
+##### NetworkX:
+```python
+graph = nx.read_edgelist(file_path, nodetype=int)
+```
+
+##### iGraph:
+```python
+graph = ig.Graph.Read_Edgelist(file_path, directed=False)
+```
+
+#### Case 2: Weighted Edge List
+
+##### NetworkX:
+```python
+graph = nx.read_weighted_edgelist(file_path, nodetype=int)
+```
+
+### Importing from a `.mtx` file
+
+Let's assume we store the adjacency matrix of the graph as follows:
+
+```python
+file_path = "graph.mtx"
+graph_matrix = scipy.io.mmread(file_path)
+```
+
+#### NetworkX:
+```python
+graph = nx.Graph(graph_matrix)
+```
+
+#### iGraph:
+```python
+graph = ig.Graph.Weighted_Adjacency(matrix.toarray().tolist(), mode="undirected")
+```
+
+
+
+
