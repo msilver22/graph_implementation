@@ -10,15 +10,15 @@ def nx_import_graph(file_path: str) -> nx.Graph:
     Parameters
     ----------
     file_path : str
-        File path of the .mtx file
+        File path of the .mtx/.txt./.gml file
 
     Returns
     -------
     nx.Graph
-        Graph imported from the .mtx file
+        Graph imported from the file path
     """
     # try:
-    # Check if the graph file is in the .mtx format or .gml
+    # Check if the graph file is in the .mtx format , .txt or .gml
     if file_path.endswith(".txt"):
         # if is the POW graph use weighted edges
         if file_path.endswith("pow.txt"):
@@ -32,10 +32,6 @@ def nx_import_graph(file_path: str) -> nx.Graph:
         graph = nx.read_gml(file_path, label="id")
     else:
         raise ValueError("File format not supported")
-
-    for node in graph.nodes:
-        # graph.nodes[node]['name'] = node
-        graph.nodes[node]["num_neighbors"] = len(list(graph.neighbors(node)))
     return graph
 
 def ig_import_graph(file_path: str) -> ig.Graph:
@@ -45,17 +41,22 @@ def ig_import_graph(file_path: str) -> ig.Graph:
     Parameters
     ----------
     file_path : str
-        File path of the graph file
-
+        File path of the .mtx/.txt./.gml file
+        
     Returns
     -------
     ig.Graph
-        Graph imported from the file
+        Graph imported from the file path
     """
     if file_path.endswith(".txt"):
         if file_path.endswith("pow.txt"):
-            graph = ig.Graph.Read_Edgelist(file_path, directed=False)
-            graph.es["weight"] = [float(weight) for weight in graph.es["weight"]]
+            with open(file_path, 'r') as f:
+                edges = []
+                for line in f:
+                    v1, v2, w = map(float, line.strip().split())
+                    if v1 < v2:
+                        edges.append((int(v1), int(v2)))
+            graph = ig.Graph(edges=edges, directed=False)
         else:
             graph = ig.Graph.Read_Edgelist(file_path, directed=False)
     elif file_path.endswith(".mtx"):
@@ -65,6 +66,7 @@ def ig_import_graph(file_path: str) -> ig.Graph:
         graph = ig.Graph.Read_GML(file_path)
     else:
         raise ValueError("File format not supported")
-
-    graph.vs["num_neighbors"] = [len(graph.neighbors(node.index)) for node in graph.vs]
+    
+    # Igraph starts from 0 index, so remove the node created with 0 degree
+    graph.vs.select(_degree=0).delete()
     return graph
