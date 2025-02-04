@@ -9,7 +9,8 @@ import igraph as ig
 
 ## Import functions
 
-Graphs can be stored in various formats such as **`.txt` (edge list), `.mtx` (matrix market format), and `.gml` (graph markup language)**. 
+Graphs can be stored in various formats such as **`.txt` (edge list), `.mtx` (matrix market format), and `.gml` (graph markup language)**.  
+To check the computational time for each file type, refer to this [link](https://github.com/msilver22/graph_implementation/blob/main/outputs/import_time_table.md)
 
 ### Importing from a `.txt` file
 
@@ -54,6 +55,23 @@ graph = nx.Graph(graph_matrix)
 #### iGraph:
 ```python
 graph = ig.Graph.Weighted_Adjacency(matrix.toarray().tolist(), mode="undirected")
+```
+
+### Importing from a `.gml` file
+
+Let's assume we store the graph in the following path:
+```python
+file_path = "graph.gml"
+```
+
+#### NetworkX:
+```python
+graph = nx.read_gml(file_path, label="id")
+```
+
+#### iGraph:
+```python
+graph = ig.Graph.Read_GML(file_path)
 ```
 
 
