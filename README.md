@@ -10,7 +10,7 @@ import igraph as ig
 ## Import functions
 
 Graphs can be stored in various formats such as **`.txt` (edge list), `.mtx` (matrix market format), and `.gml` (graph markup language)**.  
-To check the computational time for each file type, refer to this [link](https://github.com/msilver22/graph_implementation/blob/main/outputs/import_time_table.md)
+To check the computational time for each file type, refer to this [link](https://github.com/msilver22/graph_implementation/blob/main/outputs/import_time_table.md).
 
 ### Importing from a `.txt` file
 
@@ -75,5 +75,108 @@ graph = ig.Graph.Read_GML(file_path)
 ```
 
 
+## API References
+Let's assume that the variable `graph` is a nx.Graph or ig.Graph object
+
+### Number of nodes
+#### NetworkX:
+```python
+graph.number_of_nodes()
+```
+
+#### iGraph:
+```python
+graph.vcount()
+```
+
+### Number of edges
+#### NetworkX:
+```python
+graph.number_of_edges()
+```
+
+#### iGraph:
+```python
+graph.ecount()
+```
+
+### Node List
+#### NetworkX:
+```python
+nx.nodes(graph)
+```
+
+#### iGraph:
+```python
+graph.vs()
+```
+
+### Edge List
+#### NetworkX:
+```python
+nx.edges(graph)
+```
+
+#### iGraph:
+```python
+graph.get_edgelist()
+```
+
+### Neighbourhood of node `u`
+
+#### NetworkX or iGraph:
+```python
+graph.neighbors(u)
+```
+
+### Neighbourhood of node `u`
+
+#### NetworkX or iGraph:
+```python
+graph.degree(u)
+```
+
+### Adjacency between node `u` and node `v`
+
+#### NetworkX:
+```python
+graph.has_edge(u,v)
+```
+
+#### iGraph:
+```python
+graph.are_adjacent(0,1)
+```
+
+### Betweenness Centrality
+
+#### NetworkX:
+```python
+nx.betweenneess_centrality(graph)
+```
+
+#### iGraph:
+```python
+graph.betweenness()
+```
+
+### Add edge (`u`,`v`)
+
+#### NetworkX or iGraph:
+```python
+graph.degree(u)
+```
+
+### Remove edge (`u`,`v`)
+
+#### NetworkX:
+```python
+graph.remove_edge(u,v)
+```
+
+#### iGraph:
+```python
+graph.delete_edges(u,v)
+```
 
 
