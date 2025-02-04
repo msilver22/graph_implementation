@@ -13,12 +13,8 @@ def create_markdown_table(headers, rows, path):
     # Create the separator row
     separator_row = '| ' + ' | '.join(['---'] * len(headers)) + ' |'
     
-    # Create the data rows with double line separator every 3 rows
-    data_rows = []
-    for i, row in enumerate(rows):
-        data_rows.append('| ' + ' | '.join(map(str, row)) + ' |')
-        if (i + 1) % 3 == 0:
-            data_rows.append('| ' + ' | '.join(['---'] * len(headers)) + ' |')
+    # Create the data rows
+    data_rows = ['| ' + ' | '.join(map(str, row)) + ' |' for row in rows]
     
     # Combine all parts into the final table
     table = '\n'.join([header_row, separator_row] + data_rows)
